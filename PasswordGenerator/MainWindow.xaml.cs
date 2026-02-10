@@ -21,17 +21,33 @@ namespace PasswordGenerator
         {
             InitializeComponent();
 
-            _passwordGenerator = new AppData.PasswordGenerator(true, false, true, true);
+            _passwordGenerator = new AppData.PasswordGenerator(true, true, true, true);
         }
 
         private void ShowPasswordBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (ShowPasswordBtn.IsChecked == true)
+            {
+                PasswordTb.Text = PasswordPb.Password;
+                PasswordPb.Visibility = Visibility.Collapsed;
+                PasswordTb.Visibility = Visibility.Visible;
+                ShowPasswordBtn.Content = "🔒";
+            }
+            else
+            {
+                PasswordPb.Password= PasswordTb.Text;
+                PasswordPb.Visibility = Visibility.Visible;
+                PasswordTb.Visibility = Visibility.Collapsed;
+                ShowPasswordBtn.Content = "🔓";
+            }
+                
 
         }
+        
 
         private void GeneratePasswordBtn_Click(object sender, RoutedEventArgs e)
         {
-            LoginTb.Text = _passwordGenerator.Start();
+            PasswordTb.Text = PasswordTb.Text = _passwordGenerator.Start();
         }
     }
 }

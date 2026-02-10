@@ -42,9 +42,14 @@
                 <ColumnDefinition Width="50"/>
 
             </Grid.ColumnDefinitions>
+            
+            
+            <TextBox Name="PasswordTb"/>
             <PasswordBox Name="PasswordPb"/>
-            <Button Name="ShowPasswordBtn"
-                          Grid.Column="2" Content="⁕" Click="ShowPasswordBtn_Click"/>
+           
+            <ToggleButton Name="ShowPasswordBtn"
+                          Grid.Column="2" Content="🔒" Click="ShowPasswordBtn_Click"/>
+            
             <Button Name="GeneratePasswordBtn"
                     Grid.Column="4" Content="💱" Click="GeneratePasswordBtn_Click"/>
 

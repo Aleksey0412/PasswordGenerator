@@ -49,9 +49,29 @@
            
             <ToggleButton Name="ShowPasswordBtn"
                           Grid.Column="2" Content="🔒" Click="ShowPasswordBtn_Click"/>
-            
-            <Button Name="GeneratePasswordBtn"
-                    Grid.Column="4" Content="💱" Click="GeneratePasswordBtn_Click"/>
+
+            <Button Name="GeneratePasswordBtn" 
+                    Grid.Column="4" Content="💱" Click="GeneratePasswordBtn_Click">
+                <Button.ToolTip>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <CheckBox Name="IsLowerCaseCb" Grid.Row="0" Content="Нижний регистр"/>
+                        <CheckBox Name="useUpperCaseCb" Grid.Row="2" Content="Верхний регистр"/>
+                        <CheckBox Name="useNumberCb" Grid.Row="4" Content="Цифры"/>
+                        <CheckBox Name="useSymbolsCb" Grid.Row="6" Content="Символы"/>
+                    </Grid>
+                </Button.ToolTip>
+                    
+                
+            </Button>
 
 
         </Grid>

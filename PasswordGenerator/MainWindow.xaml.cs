@@ -21,7 +21,7 @@ namespace PasswordGenerator
         {
             InitializeComponent();
 
-            _passwordGenerator = new AppData.PasswordGenerator(true, true, true, true);
+            _passwordGenerator = new AppData.PasswordGenerator();
         }
 
         private void ShowPasswordBtn_Click(object sender, RoutedEventArgs e)
@@ -47,7 +47,34 @@ namespace PasswordGenerator
 
         private void GeneratePasswordBtn_Click(object sender, RoutedEventArgs e)
         {
-            PasswordTb.Text = PasswordTb.Text = _passwordGenerator.Start();
+            PasswordPb.Password = PasswordTb.Text = _passwordGenerator.Start(LowerCaseCb.IsChecked.Value,
+                UpperCaseCb.IsChecked.Value,
+                NumberCb.IsChecked.Value,
+                SymbolsCb.IsChecked.Value);
+        }
+
+        private void PasswordType_Checked(object sender, RoutedEventArgs e)
+        { 
+            //PasswordPb.Password = PasswordTb.Text = _passwordGenerator.Start(LowerCaseCb.IsChecked.Value,
+            //    UpperCaseCb.IsChecked.Value,
+            //    NumberCb.IsChecked.Value,
+            //    SymbolsCb.IsChecked.Value);
+        }
+
+        private void PasswordLengthSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            AppData.PasswordGenerator.PASSWORD_LENGTH = (int)((Slider)sender).Value;
+        }
+
+        private void PasswordLengthTb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (int.TryParse(PasswordLengthTb.Text, out int length))
+            {
+                // Ограничиваем 4-16
+                length = Math.Max(4, Math.Min(16, length));
+                PasswordLengthSlider.Value = length;
+                AppData.PasswordGenerator.PASSWORD_LENGTH = length;
+            }
         }
     }
 }

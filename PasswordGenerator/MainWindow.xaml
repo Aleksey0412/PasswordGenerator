@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="добавления пользователя" 
         SizeToContent="WidthAndHeight"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen" >
 
     <Grid Margin=" 20">
         <Grid.RowDefinitions>
@@ -18,20 +18,37 @@
             <RowDefinition Height="50" />
             <RowDefinition Height="10" />
             <RowDefinition Height="50" />
-            
+            <RowDefinition Height="10" />
+            <RowDefinition Height="50" />
+
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="300"/>
         </Grid.ColumnDefinitions>
-        
+
+
+        <TextBlock Text="Кол-во символов" Grid.Column="0" Grid.Row="8"/>
+
+        <Slider x:Name="PasswordLengthSlider"  Grid.Row="8" Grid.Column="2" Minimum="4"  Maximum="16" Value="8"
+        VerticalAlignment="Center" HorizontalAlignment="Left"  IsSnapToTickEnabled="True"
+        TickPlacement="BottomRight" TickFrequency="1" Width="195" ValueChanged="PasswordLengthSlider_ValueChanged" Margin="85,0,0,0"/>
+
+        <TextBox x:Name="PasswordLengthTb" Grid.Row="8" Grid.Column="2"
+             Text="{Binding ElementName=PasswordLengthSlider, Path=Value, 
+                    UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+             Width="40" MaxLength="2" 
+             VerticalAlignment="Center" HorizontalAlignment="Left"
+             TextChanged="PasswordLengthTb_TextChanged" Margin="27,0,0,0"/>
+
+
         <TextBlock Text="Имя:"/>
         <TextBox Name ="NameTb" Grid.Column="2"/>
-        
+
         <TextBlock Grid.Row="2" Text="Логин:"/>
-            <TextBox Name ="LoginTb" Grid.Row="2"  Grid.Column="2"/>
-            <TextBlock Grid.Row="4" Text="Пароль:"/>
+        <TextBox Name ="LoginTb" Grid.Row="2"  Grid.Column="2"/>
+        <TextBlock Grid.Row="4" Text="Пароль:"/>
 
         <Grid Grid.Row="4" Grid.Column="2">
             <Grid.ColumnDefinitions>
@@ -42,39 +59,45 @@
                 <ColumnDefinition Width="50"/>
 
             </Grid.ColumnDefinitions>
-            
-            
+
+
             <TextBox Name="PasswordTb"/>
             <PasswordBox Name="PasswordPb"/>
-           
+
             <ToggleButton Name="ShowPasswordBtn"
                           Grid.Column="2" Content="🔒" Click="ShowPasswordBtn_Click"/>
 
             <Button Name="GeneratePasswordBtn" 
-                    Grid.Column="4" Content="💱" Click="GeneratePasswordBtn_Click">
-                <Button.ToolTip>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="5"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="5"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="5"/>
-                            <RowDefinition Height="auto"/>
-                        </Grid.RowDefinitions>
-                        <CheckBox Name="IsLowerCaseCb" Grid.Row="0" Content="Нижний регистр"/>
-                        <CheckBox Name="useUpperCaseCb" Grid.Row="2" Content="Верхний регистр"/>
-                        <CheckBox Name="useNumberCb" Grid.Row="4" Content="Цифры"/>
-                        <CheckBox Name="useSymbolsCb" Grid.Row="6" Content="Символы"/>
-                    </Grid>
-                </Button.ToolTip>
-                    
-                
-            </Button>
+                    Grid.Column="4" Content="💱" Click="GeneratePasswordBtn_Click"/>
+
+
+
 
 
         </Grid>
 
+        <Grid Grid.Row="6" Grid.Column="2" Background="LightGreen">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <CheckBox Name="LowerCaseCb" Content="Нижний регистр" 
+                      IsChecked="True" Checked="PasswordType_Checked"/>
+            <CheckBox Name="UpperCaseCb" Grid.Row="2" Content="Верхний регистр" IsChecked="True"
+                      Checked="PasswordType_Checked"/>
+            <CheckBox Name="NumberCb" Grid.Column="2" Content=" Цифры" IsChecked="True" 
+                      Checked="PasswordType_Checked"/>
+            <CheckBox Name="SymbolsCb" Grid.Row="2" Grid.Column="2" Content=" Символы" 
+                      IsChecked="True" Checked="PasswordType_Checked"/>
+
+        </Grid>
     </Grid>
 </Window>

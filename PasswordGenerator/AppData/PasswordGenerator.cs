@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 
 namespace PasswordGenerator.AppData
 {
@@ -14,11 +11,12 @@ namespace PasswordGenerator.AppData
         private const string LOWER_CHARACTERS = "qwertyuiopasdfghjklzxcvbnm";
         private const string UPPER_CHARACTERS = "QWERTYUIOPASDFGHJKLZXCVBNM";
         private const string NUMBERS = "1234567890";
-        private const string SYMBOLS = "!@#$%^&*()";
+        private const string SYMBOLS = "!@#$%^&*()_+-=[]{}|;:,.<>?";
 
-        private readonly List<string>  _patterns = new List<string>();
+        private static readonly Random _random = new Random();
+        private static readonly List<string> _patterns = new List<string>();
 
-        public string Start(bool useLowerCase, bool useUpperCase, bool useNumber, bool useSymbols)
+        public static string Start(bool useLowerCase, bool useUpperCase, bool useNumber, bool useSymbols)
         {
             _patterns.Clear();
 
@@ -27,20 +25,19 @@ namespace PasswordGenerator.AppData
             if (useNumber) _patterns.Add(NUMBERS);
             if (useSymbols) _patterns.Add(SYMBOLS);
 
-            StringBuilder password = new StringBuilder();
-            Random random = new Random();
+            if (_patterns.Count == 0)
+                return string.Empty;
 
-            // Автоматически использует текущее значение слайдера!
-            while (password.Length < PASSWORD_LENGTH)  // ← здесь значение со слайдера
+            StringBuilder password = new StringBuilder(PASSWORD_LENGTH);
+
+            for (int i = 0; i < PASSWORD_LENGTH; i++)
             {
-                int patternIndex = random.Next(_patterns.Count);
-                int charIndexFromPattern = random.Next(_patterns[patternIndex].Length);
-                password.Append(_patterns[patternIndex][charIndexFromPattern]);
+                int patternIndex = _random.Next(_patterns.Count);
+                int charIndex = _random.Next(_patterns[patternIndex].Length);
+                password.Append(_patterns[patternIndex][charIndex]);
             }
 
             return password.ToString();
         }
     }
 }
-
-

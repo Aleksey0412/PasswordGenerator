@@ -29,7 +29,7 @@
         </Grid.ColumnDefinitions>
 
 
-        <TextBlock Text="Кол-во символов" Grid.Column="0" Grid.Row="8"/>
+        <TextBlock Text="Кол-во символов:" Grid.Column="0" Grid.Row="8"/>
 
         <Slider x:Name="PasswordLengthSlider"  Grid.Row="8" Grid.Column="2" Minimum="4"  Maximum="16" Value="8"
         VerticalAlignment="Center" HorizontalAlignment="Left"  IsSnapToTickEnabled="True"
